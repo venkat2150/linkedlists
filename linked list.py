@@ -62,7 +62,56 @@ class linklist:
             t=t.next
         return count
         
-                            
+    def swap(self, a:int, b:int) :
+        t1=self.head
+        i=0
+        while  t1 and i<a-1:
+            t1=t1.next
+            i+=1
+        i=0
+        t2=self.head
+        while t2 and i<b-1:
+            t2=t2.next
+            i+=1
+            
+        if t1 and t2:    
+            t1.val,t2.val=t2.val, t1.val
+        else:
+            print("invalid")
+        
+    def pos(self, x:int)->int:
+        t=self.head
+        count=0
+        while t and t.val!=x:
+            t=t.next
+            count+=1    
+        if not t:
+            return -1
+        else:
+            return count+1
+        
+    def sinsert(self, srtd: object, nn: object)-> object:
+        t=None
+        if not srtd or srtd.val<=nn.val:
+            nn.next=srtd
+            srtd=nn
+        else:
+            t=srtd
+            while t.next and t.next.val> nn.val:
+                t=t.next
+            nn.next=t.next
+            t.next=nn    
+        return srtd
+    
+    def sort(self):
+        srtd=None
+        t=self.head
+        while t:
+            temp=t.next
+            srtd=self.sinsert(srtd, t)
+            t=temp       
+        self.head=srtd
+            
     def prt(self):
         t=self.head
         print("")
@@ -83,9 +132,12 @@ if __name__ == "__main__":
     print("enter 4 for deleting an element based on the index")
     print("enter 5 for to get the length of the linked list")
     print("enter 6 to print the link list") 
-    print("enter 7 to stop the program")
+    print("enter 7 to find the position of particular elemenet in the linked list")
+    print("enter 8 to swap two elements of an array")
+    print("enter 9 to sort the linked list")
+    print("enter anything more than 9 to stop the program")
           
-    while c!=7:
+    while c!=-1:
         c=int(input("enter choice"))
         if c==1:
             print("")
@@ -109,6 +161,18 @@ if __name__ == "__main__":
             
         elif c==6:
             l1.prt()
+        elif c==7:
+            x=int(input("enter the element to find its position: "))
+            print(l1.pos(x))
+        elif c==8:
+            print("")
+            x1=int(input("enter the position of the first element: "))
+            print("")
+            x2=int(input("enter the position of the second element: "))
+            l1.swap(x1, x2)
+        elif c == 9:
+            print("")
+            l1.sort()
         else:
             break
-                        
+                     
