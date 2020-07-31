@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Jul 28 11:54:33 2020
-
-@author: venka
+@author: venkata kautilya
 """
 class node:
     def __init__(self, val):
@@ -13,6 +12,18 @@ class linklist:
     def __init__(self):
         self.head=None
         
+    def insert(self, x: int, y: int):
+        t=self.head
+        if 0<y<=self.length()+1 and t:
+            ct=1
+            while t.next and ct!=y-1:
+                t=t.next
+            temp=node(x)
+            temp.next=t.next
+            t.next=temp
+        else:
+            print("invalid")
+                
     def insert_at_begin(self, x:int):
         t=self.head
         if t==None:
@@ -24,6 +35,9 @@ class linklist:
     def insert_at_end(self, x:int):
         
         t=self.head
+        if not t:
+            self.insert_at_begin(x)
+            return
         while t.next!=None:
             t=t.next
         temp=node(x)
@@ -125,7 +139,8 @@ class linklist:
             
 if __name__ == "__main__":
     l1=linklist()
-    c=0
+    
+    print("enter 0 to insert")
     print("enter 1 for insertion at begin")
     print("enter 2 for insertion at end")
     print("enter 3 for removing an element")
@@ -137,9 +152,14 @@ if __name__ == "__main__":
     print("enter 9 to sort the linked list")
     print("enter anything more than 9 to stop the program")
           
-    while c!=-1:
+    while True:
         c=int(input("enter choice"))
-        if c==1:
+        if c==0:
+            print("")
+            x=int(input("enter the number to be inserted: "))
+            y=int(input("enter the position to be inserted in:"))
+            l1.insert(x, y)
+        elif c==1:
             print("")
             x=int(input("enter number to insert:"))
             l1.insert_at_begin(x)
@@ -157,8 +177,7 @@ if __name__ == "__main__":
             l1.delete(x)
         elif c==5:
             print("")
-            print("length is: "+str(l1.length()))
-            
+            print("length is: "+str(l1.length()))    
         elif c==6:
             l1.prt()
         elif c==7:
@@ -175,4 +194,3 @@ if __name__ == "__main__":
             l1.sort()
         else:
             break
-                     
